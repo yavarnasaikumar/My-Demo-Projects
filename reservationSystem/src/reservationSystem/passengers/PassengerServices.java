@@ -150,15 +150,18 @@ public class PassengerServices {
 //		System.out.println("Please enter your droping point");
 //		dropingPoint = sc.next();
 		for(Passenger passenger:passengers) {
-			if(passenger.getBoardingPoint().equals("vizag") && passenger.getDropingPoint().equals("chennai")) {
+			if((passenger.getBoardingPoint().equals("vizag")|| passenger.getBoardingPoint().equals("chennai")) 
+					&& (passenger.getDropingPoint().equals("chennai") || passenger.getDropingPoint().equals("vizag"))) {
 				fare = fare + 1500;
 				System.out.println(fare);
 			}
-			else if (passenger.getBoardingPoint().equals("vizag") && passenger.getDropingPoint().equals("vijayawada")) {
+			else if ((passenger.getBoardingPoint().equals("vizag")||passenger.getBoardingPoint().equals("vijayawada")) 
+					&& (passenger.getDropingPoint().equals("vijayawada")|| passenger.getDropingPoint().equals("vizag"))) {
 				fare = fare + 800;
 				System.out.println(fare);
 			}
-			else if (passenger.getBoardingPoint().equals("vijayawada") && passenger.getDropingPoint().equals("chennai")) {
+			else if ((passenger.getBoardingPoint().equals("vijayawada")|| passenger.getBoardingPoint().equals("chennai")) 
+					&& (passenger.getDropingPoint().equals("chennai") || passenger.getDropingPoint().equals("vijayawada"))) {
 				fare = fare + 900;
 				System.out.println(fare);
 			}
