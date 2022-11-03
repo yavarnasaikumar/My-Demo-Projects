@@ -75,7 +75,7 @@ public class Passenger {
 
 	@Override
 	public String toString() {
-		return "Passenger [seatNo=" + seatNo + ", pnrNo=" + pnrNo + ", name=" + name + ", email=" + email
-				+ ", boardingPoint=" + boardingPoint + ", dropingPoint=" + dropingPoint + ", age=" + age + "]";
+		return "Passenger " + "[" + " Name : " + name + "     Seat No : " + seatNo + "    PNR No : " + pnrNo + "      Email : " + email +"\n" +" \n"
+				 + "           Age : " + age + "       Boarding Point : " + boardingPoint + "        Droping Point : " + dropingPoint + "]";
 	}
 }
