@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class PassengerServices {
 
-	int fare=0;
+	static int fare;
 	static List<String> stops = List.of("vizag","vijayawada","chennai");
 	
 	static Scanner sc = new Scanner(System.in);
@@ -94,11 +94,11 @@ public class PassengerServices {
 	}
 	
 	public void ticketDetails() {
-		System.out.println("Please enter your seat number : ");
-		int seatNum = sc.nextInt();
+		System.out.println("Please enter your PNR number : ");
+		String pnrNum1 = sc.next();
 		for (Passenger passenger : passengers ) {
-			if (passenger.getSeatNo() == seatNum) {
-				System.out.println("Your Ticket Details are : " + passenger);
+			if (passenger.getPnrNo().equals(pnrNum1)) {
+				System.out.println("Your Ticket Details are : \n" + passenger);
 			}
 		}
 	}
@@ -113,7 +113,7 @@ public class PassengerServices {
 		}
 		System.out.println("Congratulations you successfully booked your ticket. Please note your PNR, for further reference : " + 
 		pnrNum1);
-		System.out.print("You need to pay " ) ; calculateFare();
+		System.out.print("You need to pay " +  PassengerServices.calculateFare());
 	}
 	
 	public void printTicketList() {
@@ -123,61 +123,54 @@ public class PassengerServices {
 	}
 	
 	public void cancleTicket() {
-		System.out.println("Please enter your seat number : ");
-		int seatNum1 = sc.nextInt();
+		System.out.println("Please enter your PNR number : ");
+		String pnrNum1 = sc.next();
 		for (Passenger passenger : passengers) {
-			if (passenger.getSeatNo() == seatNum1) {
+			if (passenger.getPnrNo().equals(pnrNum1)) {
+				seatNumbers.add(passenger.getSeatNo());
 				passengers.remove();
-				seatNumbers.add(seatNum1);
 				System.out.println("Your ticket was canclled. Thank you & Visit again!!");
-			} else if (seatNum1 != passenger.getSeatNo()){
-				System.out.println("You entered worng seat number");
-			}else if(passenger.getSeatNo() == null) {
-				System.out.println("The seat was not booked");
 			}
 		}
 	}
 	
-	public void calculateFare() {
-		
-//		String boardingPoint;
-//		String dropingPoint;
-//
-//		System.out.println("Avaliable Stops are : " + stops);
-//		System.out.println();
-//		System.out.println("Please enter your boarding point");
-//		boardingPoint = sc.next();
-//		System.out.println("Please enter your droping point");
-//		dropingPoint = sc.next();
+	public static int calculateFare() {
+	
 		for(Passenger passenger:passengers) {
 			if((passenger.getBoardingPoint().equals("vizag")|| passenger.getBoardingPoint().equals("chennai")) 
 					&& (passenger.getDropingPoint().equals("chennai") || passenger.getDropingPoint().equals("vizag"))) {
-				fare = fare + 1500;
-				System.out.println(fare);
+				if(passenger.getAge() <= 10 && passenger.getAge() > 0) {
+					fare = 1000;
+				}else if(passenger.getAge() > 70) {
+					fare = 1200;
+				}else {
+					fare = 1500;
+				}
 			}
 			else if ((passenger.getBoardingPoint().equals("vizag")||passenger.getBoardingPoint().equals("vijayawada")) 
 					&& (passenger.getDropingPoint().equals("vijayawada")|| passenger.getDropingPoint().equals("vizag"))) {
-				fare = fare + 800;
-				System.out.println(fare);
+				if(passenger.getAge() <= 10 && passenger.getAge() > 0) {
+					fare = 600;
+				}else if(passenger.getAge() > 70) {
+					fare = 700;
+				}else {
+					fare = 800;
+				}
 			}
 			else if ((passenger.getBoardingPoint().equals("vijayawada")|| passenger.getBoardingPoint().equals("chennai")) 
 					&& (passenger.getDropingPoint().equals("chennai") || passenger.getDropingPoint().equals("vijayawada"))) {
-				fare = fare + 900;
-				System.out.println(fare);
+				if(passenger.getAge() <= 10 && passenger.getAge() > 0) {
+					fare = 700;
+				}else if(passenger.getAge() > 70) {
+					fare = 800;
+				}else {
+					fare = 900;
+				}
 			}
 			else {
-				System.out.println("No bus avaliable betwwen those two stops");
-				bookTicket();
+				System.out.println("No bus avaliable betwwen those two stops, please exit and try again");
 			}
 		}
+		return fare;
 	}
-	
-//	public void printTicket() {
-//		System.out.println("Please enter your PNR number : ");
-//		String pnrNumber = sc.next();
-//		Predicate<? super Passenger> predicate = user -> user.getPnrNo().equals(pnrNumber);
-//		return passenger.stream().filter(predicate).findFirst().orElse(null);
-//		Predicate<? super Passenger> predicate = passenger -> passenger.getPnrNo().equals(pnrNumber);
-//		System.out.println(Passenger.stream().filter());
-//	}
 }
